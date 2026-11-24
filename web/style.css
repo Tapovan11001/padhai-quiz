@@ -126,7 +126,7 @@ button:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px
   .q { font-size: 20px; }
 }
 
-/* ---- "Created by Aarav Makhija" watermark + plain-language explainer ---- */
+/* ---- "Created by Aarov Makhija" watermark + plain-language explainer ---- */
 .made-by {
   position: fixed; z-index: 50;
   right: calc(12px + env(safe-area-inset-right, 0px));
