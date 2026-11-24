@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Padhai Quiz</title>
+<meta name="description" content="Paste a chapter, get a Hindi and English practice quiz. Every answer is checked against the chapter before you see it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <h1>Padhai Quiz <span class="hi" lang="hi">पढ़ाई क्विज़</span></h1>
+      <p class="tag">Paste a chapter. Get a practice quiz in Hindi and English. Every answer is checked against the chapter first.</p>
+    </div>
+    <div class="langs" role="group" aria-label="Quiz language">
+      <button type="button" data-lang="both" aria-pressed="true">Both</button>
+      <button type="button" data-lang="en" aria-pressed="false">English</button>
+      <button type="button" data-lang="hi" aria-pressed="false" lang="hi">हिंदी</button>
+    </div>
+  </header>
+
+  <main class="desk">
+    <section class="chapter" aria-labelledby="ch-h">
+      <div class="sec-head">
+        <h2 id="ch-h">Chapter</h2>
+        <button type="button" id="reset-sample" class="link">Use sample chapter</button>
+      </div>
+      <textarea id="chapter" spellcheck="false" aria-label="Chapter text"></textarea>
+      <div class="gen">
+        <label for="api-key">Anthropic API key</label>
+        <input id="api-key" type="password" autocomplete="off" placeholder="sk-ant-..." spellcheck="false">
+        <button type="button" id="generate" class="primary">Make a quiz from this chapter</button>
+        <p id="gen-status" class="status" aria-live="polite"></p>
+        <p class="fine">Claude writes the questions, then a checker tests each one: 4 different options, a valid answer, both languages filled, and the answer's key words found in your chapter. Anything that fails goes back to Claude to fix. Your key stays in this tab and goes only to api.anthropic.com.</p>
+      </div>
+    </section>
+
+    <section class="quiz" aria-labelledby="quiz-h">
+      <div class="sec-head">
+        <h2 id="quiz-h"><span id="quiz-title">Friction</span></h2>
+        <span id="progress" class="progress"></span>
+      </div>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+
+      <article id="card" class="card">
+        <p class="topic" id="q-topic"></p>
+        <h3 class="q" id="q-text"></h3>
+        <div class="opts" id="opts" role="group" aria-labelledby="q-text"></div>
+        <div id="feedback" class="feedback" hidden>
+          <p class="verdict" id="verdict"></p>
+          <p class="why" id="why"></p>
+          <button type="button" id="next" class="primary">Next question</button>
+        </div>
+      </article>
+
+      <article id="result" class="card result" hidden>
+        <p class="topic">Result</p>
+        <p class="big" id="r-score"></p>
+        <p id="r-line"></p>
+        <div id="r-topics" class="topics"></div>
+        <div class="actions">
+          <button type="button" id="retry" class="primary">Retry the ones I got wrong</button>
+          <button type="button" id="restart">Start again</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <section class="how" aria-label="How it works">
+    <h2>How it works</h2>
+    <p>A student pastes a chapter from their textbook. Padhai Quiz turns it into 6 to 8 practice questions, each in both English and Hindi. Claude writes the questions, but it doesn't get the last word. A checker written in plain code tests every question: four different options, one correct answer, both languages filled in, and the answer's key words found in the chapter. If a question fails, it goes back to Claude with the reason, and Claude fixes it. After the quiz, the student sees their score, which topics they're weak in, and can retry only the questions they got wrong.</p>
+  </section>
+
+  <footer class="foot">
+    <p>Built with TinyHarness, a small agent loop written from scratch. The quiz checks run in plain code, so a wrong or made-up answer can't reach the student.</p>
+  </footer>
+<a class="made-by" href="https://github.com/Tapovan11001" target="_blank" rel="noopener">Created by Aarav Makhija</a>
+<script type="module" src="./main.ts"></script>
+</body>
+</html>
